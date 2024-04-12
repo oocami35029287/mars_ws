@@ -1,0 +1,15 @@
+Header header
+bool stop
+float32 t
+int32 robot_x
+int32 robot_y
+float32 eva_cur_h
+int32 idx_h
+float32 eva_avg_h
+float32 colli_t_h
+int32 colli_h
+float32 eva_cur_o
+int32 idx_o
+float32 eva_avg_o
+float32 colli_t_o
+int32 colli_o

@@ -1,0 +1,9 @@
+resolution: 0.05
+image: ./gen_world_4.pgm
+origin:
+- 0
+- 0
+- 0
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
