@@ -351,8 +351,8 @@ void PathAssessment::agentStatesCallback(const pedsim_msgs::AgentStates::ConstPt
         // 設定 assessment 消息的其他欄位
         assess_msg.stop = false;
         assess_msg.t = total_time;
-        assess_msg.robot_x = robot_x;
-        assess_msg.robot_y = robot_y;
+        assess_msg.robot_x = robot_pose.position.x / resolution;
+        assess_msg.robot_y = robot_pose.position.y / resolution;
 
         assess_msg.eva_cur_h = eva_cur_h;
         assess_msg.idx_h = friendlymap_ptr->data[robot_idx];
