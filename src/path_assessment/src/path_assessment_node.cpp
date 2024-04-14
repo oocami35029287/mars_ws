@@ -77,7 +77,7 @@ PathAssessment::PathAssessment(ros::NodeHandle& nh) : nh_(nh)
     ros::param::param<int>("~upper_o_threshold", upper_o_threshold, 100); 
     ros::param::param<double>("~waiting_stop", waiting_stop, 2.5); 
     // ROS publishers & subscribers
-    map_sub_ = nh_.subscribe("/move_base/global_costmap/costmap", 1, &PathAssessment::mapCallback, this);
+    map_sub_ = nh_.subscribe("/inflated_map", 1, &PathAssessment::mapCallback, this);
     model_states_sub_ = nh_.subscribe("/gazebo/model_states", 1, &PathAssessment::modelStatesCallback, this);
     agent_states_sub_ = nh_.subscribe("pedsim_simulator/simulated_agents", 1, &PathAssessment::agentStatesCallback, this);
     pub_friendlymap_ = nh_.advertise<nav_msgs::OccupancyGrid>("human_friendly_map", 1);

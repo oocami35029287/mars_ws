@@ -145,9 +145,10 @@ add_library(${PROJECT_NAME} src/localmap_utils.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 add_executable(path_assessment_node src/path_assessment_node.cpp)
-
+add_executable(occupancy_map_node src/occupancy_map.cpp)
 ## 指定链接的库
 target_link_libraries(path_assessment_node ${PROJECT_NAME} ${catkin_LIBRARIES})
+target_link_libraries(occupancy_map_node ${PROJECT_NAME} ${catkin_LIBRARIES})
 
 ## 添加依赖
 ## add_dependencies(path_assessment ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
