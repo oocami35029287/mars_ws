@@ -296,7 +296,7 @@ void PathAssessment::agentStatesCallback(const pedsim_msgs::AgentStates::ConstPt
                 }
                 // other times of collision
                 if(colli_o_cnt>=2){
-                    eva_avg_o = eva_avg_o*(eva_cur_o-1)/eva_cur_o+eva_cur_o*1/eva_cur_o;
+                    eva_avg_o = eva_avg_o*(colli_o_cnt-1)/colli_o_cnt+eva_cur_o*1/colli_o_cnt;
                 }
                 //first of a collision peak
                 if(!colli_o_flg){

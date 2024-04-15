@@ -2,33 +2,58 @@ import cv2
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# 读取CSV文件
-df = pd.read_csv('data/assessment_data.csv')
+# Read the first CSV file
+try:
+    df_dwa = pd.read_csv('data/dwa12-h.csv')
+    robot_x_dwa = df_dwa['robot_x'].tolist()
+    robot_y_dwa = df_dwa['robot_y'].tolist()
+    dwa_data_available = True
+except FileNotFoundError:
+    dwa_data_available = False
 
-# 提取robot_x和robot_y列的数据
-robot_x = df['robot_x'].tolist()
-robot_y = df['robot_y'].tolist()
+# Read the second CSV file
+try:
+    df_teb = pd.read_csv('data/teb12-h.csv')
+    robot_x_teb = df_teb['robot_x'].tolist()
+    robot_y_teb = df_teb['robot_y'].tolist()
+    teb_data_available = True
+except FileNotFoundError:
+    teb_data_available = False
 
-# 读取底图
-image = cv2.imread('map/gen_world_11.jpg')
+# Read the third CSV file
+try:
+    df_social = pd.read_csv('data/social12-h.csv')
+    robot_x_social = df_social['robot_x'].tolist()
+    robot_y_social = df_social['robot_y'].tolist()
+    social_data_available = True
+except FileNotFoundError:
+    social_data_available = False
 
-# 获取底图的大小
-height, width, _ = image.shape
+# Plot the data if available
+if dwa_data_available or teb_data_available or social_data_available:
+    image = cv2.imread('map/gen_world_16.jpg')
+    height, width, _ = image.shape
 
-# 缩放因子，用于将坐标映射到像素坐标
+    plt.figure()
+    plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    if dwa_data_available:
+        pixel_x_dwa = [x for x in robot_x_dwa]
+        pixel_y_dwa = [height - y  for y in robot_y_dwa]
+        plt.plot(pixel_x_dwa, pixel_y_dwa, 'r-', label='DWA')
+    if teb_data_available:
+        pixel_x_teb = [x for x in robot_x_teb]
+        pixel_y_teb = [height - y  for y in robot_y_teb]
+        plt.plot(pixel_x_teb, pixel_y_teb, 'g-', label='TEB')
+    if social_data_available:
+        pixel_x_social = [x for x in robot_x_social]
+        pixel_y_social = [height - y  for y in robot_y_social]
+        plt.plot(pixel_x_social, pixel_y_social, 'b-', label='Social')
 
-
-# 将原始坐标映射到像素坐标
-pixel_x = [x for x in robot_x]
-# 将y轴方向调整为图像中的y轴方向相反
-pixel_y = [height - y  for y in robot_y]
-
-# 绘制图形
-plt.figure()
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.plot(pixel_x, pixel_y, 'r-')
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.title('Robot Path on Image')
-plt.grid(True)
-plt.show()
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Robot Paths')
+    plt.grid(True)
+    plt.legend()
+    plt.show()
+else:
+    print("No data available to plot.")

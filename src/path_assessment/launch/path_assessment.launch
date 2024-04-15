@@ -3,7 +3,7 @@
   <arg name="upper_h_threshold" default="100" />
   <arg name="lower_h_threshold" default="15" />
   <arg name="upper_o_threshold" default="100" />
-  <arg name="lower_o_threshold" default="20" />
+  <arg name="lower_o_threshold" default="35" />
   <arg name="waiting_stop" default="2.5" />
   <arg name="inflation_radius" default="0.1" />
   <!-- 启动 ROS 节点 -->
